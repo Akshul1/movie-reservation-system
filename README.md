@@ -56,7 +56,7 @@ I implemented a **`SeatLockManager`** using `ConcurrentHashMap` and `ReentrantLo
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/your-username/movie-reservation-system.git](https://github.com/your-username/movie-reservation-system.git)
+    git clone [https://github.com/Akshul1/movie-reservation-system](https://github.com/Akshul1/movie-reservation-system)
     cd movie-reservation-system
     ```
 

@@ -6,6 +6,8 @@ import com.project.movie_reservation_system.enums.MovieGenre;
 import com.project.movie_reservation_system.exception.MovieNotFoundException;
 import com.project.movie_reservation_system.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -29,6 +31,7 @@ public class MovieService {
         return movieRepository.findAll(PageRequest.of(page,pageSize));
     }
 
+    @Cacheable(value = "movies", key = "#id")
     public Movie getMovieById(long id){
        return movieRepository.findById(id)
                 .orElseThrow(() -> new MovieNotFoundException(MOVIE_NOT_FOUND, HttpStatus.NOT_FOUND));
@@ -47,6 +50,7 @@ public class MovieService {
         return movieRepository.save(movie);
     }
 
+    @CacheEvict(value = "movies", key = "#movieId")
     public Movie updateMovieById(long movieId, MovieRequestDto movieRequestDto) {
         return movieRepository.findById(movieId)
                 .map(movieInDb -> {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPER_ADMIN')")
+//@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPER_ADMIN')")
 @RestController
 @RequestMapping("/api/v1/movies")
 public class MovieController {
@@ -53,6 +53,7 @@ public class MovieController {
         );
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPER_ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<ApiResponseDto> createNewMovie(@RequestBody MovieRequestDto movieRequestDto){
         Movie movie = movieService.createNewMovie(movieRequestDto);
@@ -66,6 +67,7 @@ public class MovieController {
                 );
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPER_ADMIN')")
     @PutMapping("/movie/update/{movieId}")
     public ResponseEntity<ApiResponseDto> updateMovieById(@PathVariable long movieId, @RequestBody MovieRequestDto movieRequestDto){
         Movie movie = movieService.updateMovieById(movieId, movieRequestDto);
@@ -79,6 +81,7 @@ public class MovieController {
                 );
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SUPER_ADMIN')")
     @DeleteMapping("/movie/delete/{movieId}")
     public ResponseEntity<?> deleteMovieById(@PathVariable long movieId){
         movieService.deleteMovieById(movieId);
